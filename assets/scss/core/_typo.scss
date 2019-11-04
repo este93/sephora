@@ -1,0 +1,63 @@
+//----- Variables / Typography
+
+@font-face {
+	font-family: 'AvalonDemi';
+	src: url('~/assets/fonts/Avalon-Demi.woff') format('woff'),
+	url('~/assets/fonts/Avalon-Demi.woff2') format('woff2'),
+	url('~/assets/fonts/Avalon-Demi.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'AvalonBoldOblique';
+	src: url('~/assets/fonts/Avalon-BoldOblique.woff') format('woff'),
+	url('~/assets/fonts/Avalon-BoldOblique.woff2') format('woff2'),
+	url('~/assets/fonts/Avalon-BoldOblique.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'AvalonBold';
+	src: url('~/assets/fonts/Avalon-Bold.woff') format('woff'),
+	url('~/assets/fonts/Avalon-Bold.woff2') format('woff2'),
+	url('~/assets/fonts/Avalon-Bold.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'BlackDiamond';
+	src: url('~/assets/fonts/Black-Diamond.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+//------FONT FAMILY VARIBALE
+$fontDefault             : Arial, sans-serif;
+
+// Examples
+// $ff == $font-family
+$ff-regular         : 'AvalonDemi', $fontDefault;
+
+//----- Font size
+$font-size-base         : 10px;
+
+//------GLOBAL FONT SETTINGS
+html {
+  // @include font-size-vw($font-size-base, $font-size-base);
+  height: 100%;
+  // overflow: hidden;
+}
+body {
+  font-family: $ff-regular;
+  -webkit-font-smoothing: antialiased;
+  height: 100%;
+  // overflow: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+#wrapper{
+	height: 100%;
+}

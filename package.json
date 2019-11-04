@@ -1,0 +1,23 @@
+{
+  "name": "sephora",
+  "version": "1.0.0",
+  "description": "Sephora",
+  "author": "Stefan Petkovic",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "interactjs": "^1.6.3",
+    "node-sass": "^4.13.0",
+    "nuxt": "^1.0.0",
+    "sass-loader": "^7.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1",
+    "webpack-cli": "^3.3.10"
+  }
+}
