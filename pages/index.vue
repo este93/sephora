@@ -56,12 +56,12 @@
 </template>
 
 <script>
-import Landing from '~/components/Landing.vue'
-import Cards from '~/components/Cards.vue'
-import Match from '~/components/Match.vue'
-import Colors from '~/components/Colors.vue'
-import Product from '~/components/Product.vue'
-import Finish from '~/components/Finish.vue'
+import Landing from '~/components/Landing'
+import Cards from '~/components/Cards'
+import Match from '~/components/Match'
+import Colors from '~/components/Colors'
+import Product from '~/components/Product'
+import Finish from '~/components/Finish'
 
 export default {
     components: {
