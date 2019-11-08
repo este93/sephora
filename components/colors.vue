@@ -1,6 +1,7 @@
 <template>
 	
-	<div class="c-colors" :class="{ multiple: data.items.length > 1 }">		
+	<div class="c-colors" :class="{ multiple: data.items.length > 1 }">	
+    <div class="c-cards__count"><span>2</span>/<span>3</span></div>	
     <h1 class="c-colors__title">
       <span>{{ data.category }}</span>
       {{ data.title }}
@@ -11,7 +12,7 @@
         v-for="(item, index) in data.items"
         :key="index"
       >
-        <h3 class="c-colors__multiple__title">{{ item.title }}</h3>
+        <h3 class="c-colors__multiple__title"><span>{{ item.title }}</span></h3>
         <div class="c-colors__multiple__img">          
           <img :src="getImgUrl(item.image)" alt="">  
         </div>
@@ -48,7 +49,7 @@
 
     <div class="b-valider">
       <div class="b-valider__item" @click="back"><span></span>Retour</div>
-      <div class="b-valider__item" @click="selectProduct">Valider<span></span></div>
+      <div class="b-valider__item" @click="selectProduct" v-if="colorSelected">Valider<span></span></div>
     </div>
 	</div>
 
@@ -61,7 +62,7 @@ export default {
   props: ['data'],
   data(){
     return{
-      colorSelected: undefined,
+      colorSelected: false,
       selectedItem: []    
     }
   },
@@ -77,7 +78,11 @@ export default {
       this.$emit('back');
     },
     selectProduct(){
-      this.$emit('product', this.colorSelected - 1, this.selectedItem)
+      if(this.colorSelected){
+        this.$emit('product', this.colorSelected - 1, this.selectedItem)
+      }else{
+        alert("Choose color")
+      }
     }
   }
 }
@@ -90,7 +95,7 @@ export default {
     display: flex;
     justify-content: space-between;
     color: $color-white;
-    position: absolute;
+    position: fixed;
     bottom: 15px;
     left: 0;
     right: 0;
@@ -123,10 +128,17 @@ export default {
     padding: 15px 0;
     height: 100%;
     &.multiple{
-      padding: 15px 0 0 18px;
+      padding: 10px 0 0 0;
+      .c-colors__title{
+        margin-bottom: -3px;
+      }
       .c-colors__list{
         white-space: normal;
       }
+    }
+    .c-cards__count{
+      background: $color-gray;
+      position: relative;
     }
     &--wrapper{
       padding: 0 46px;
@@ -134,15 +146,15 @@ export default {
     &__title{
       text-transform: uppercase;
       color: $color-primary;
-      font-size: 25px;
-      line-height: 25px;
-      line-height: 30px;
+      font-size: 20px;
+      line-height: 24px;
       font-family: AvalonBoldOblique;
       text-align: center;
-      margin-bottom: 13px;
+      max-width: 250px;
+      margin: 0 auto 10px auto;
+      position: relative;
       span{
         color: $color-black;
-        display: block;
       }
     } 
     &--content{
@@ -155,20 +167,21 @@ export default {
       }
     }
     &__list{
-      max-width: 215px;
-      margin: auto;
+      padding: 0 7px;
       &__item{
         text-align: center;
-        width: 29px;
-        line-height: 29px;
+        width: 31px;
+        line-height: 31px;
         border-radius: 100%;
         background: black;
         color: $color-white;
         font-family: AvalonBold;
-        font-size: 10.5px;
+        font-size: 12px;
         display: inline-block;
-        margin: 4px 2px;
-        border: 1px solid transparent;
+        margin: 4px 3px;
+        border: 2px solid transparent;
+        z-index: 1;
+        position: relative;
         &.highlight{
           border-color: $color-black;
         }
@@ -177,28 +190,37 @@ export default {
     &__multiple{      
       overflow: auto;
       white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      &::-webkit-scrollbar {
+        display: none;
+      }
       &__item{
         display: inline-block;
-        max-width: 75%;
-        margin-right: 18px;
+        vertical-align: top;
+        max-width: 82%;
+        margin-right: 9px;
+        &:first-child{
+          margin-left: 9px;
+        }
       }
       &__img{
-        border-radius: 20px;
-        margin-bottom: 7px;
+        border-radius: 25px;
+        margin-bottom: 3px;
         overflow: hidden;
       }
       &__title{
         text-transform: uppercase;
-        text-align: center;
-        background: $color-gray;
-        font-size: 12.5px;
-        padding: 7px;
-        border-radius: 15px;
-        width: 77%;
-        margin: auto;
-        margin-bottom: -10px;
+        font-size: 10px;
         z-index: 1;
         position: relative;
+        top: 29px;
+        left: 14px;
+        letter-spacing: -0.2px;
+        span{
+          background: $color-gray;
+          padding: 9px 18px 6px 19px;
+          border-radius: 15px;
+        }
       }
     }
   }

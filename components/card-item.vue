@@ -10,7 +10,10 @@
         {{ card.title }}
       </div>  
       <div class="card__img">
-        <img :src="getImgUrl(card.image)" alt="">  
+        <div class="card__overlay">
+          <div></div>
+          <img :src="getImgUrl(card.image)" alt="">            
+        </div>
       </div>    
     </div>
   </div>
@@ -61,7 +64,7 @@ export default {
 
     interact(element).draggable({
 
-      axis: "x",   // allowing vertical scroll
+      // axis: "x",   // allowing vertical scroll
 
       onstart: () => {
         this.isInteractAnimating = false;
@@ -88,7 +91,7 @@ export default {
         const { interactXThreshold, interactYThreshold } = this.$options.static;
         this.isInteractAnimating = true;
 
-        if (x > interactXThreshold) this.like();
+        if (x > interactXThreshold) this.playCard(REJECT_CARD);
         else if (x < -interactXThreshold) this.playCard(REJECT_CARD);
         else this.resetCardPosition();
       }
@@ -105,10 +108,6 @@ export default {
     },
     hideCard() {
       this.$emit("hideCard", this.card);
-    },
-
-    like(){
-      this.$emit('likeCard');
     },
 
     playCard(interaction) {
@@ -160,7 +159,6 @@ export default {
 
   .itemCard{
     position: relative;
-    // overflow: hidden;
       width: 100%;
     cursor: -webkit-grab;
     cursor: grab;
@@ -180,30 +178,57 @@ export default {
         font-size: 27px;
         min-height: 55px;
       }
-      img{
-        display: block;
-        width: 192px;
-        height: 192px;
-        border: 5px solid $color-white;
-        border-radius: 20px;
+      &__overlay{
+        display: inline-block;
+        position: relative;
+        div{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: $color-gray;
+          opacity: 0;
+          animation: opacity .5s cubic-bezier( 0.36, 0.45, 0.63, 0.53);
+        }
+      }
+      &__img{
+        overflow: hidden;
+        text-align: center;
+        img{
+          display: block;
+          max-height: 31vH;
+          margin: auto;
+          border: 5px solid $color-white;
+          border-radius: 20px;
+          box-sizing: border-box;
+        }        
       }
     }
     &:not([data-index='1']) {
-      .card{
-      opacity: 0;
-      transition: opacity 2s linear;
-        
-      }
       display: none;
-
-      // .card{
-      //   position: absolute;
-      //   top: 19px;
-      //   left: 25px;
-      //   opacity: 0;
-      //   transition: opacity 2s linear;        
-      // }
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      .card{
+        opacity: 0;
+        transform: scale(.6);
+        transition: all .2s linear;        
+      }
+      .card__overlay div{
+        opacity: 1;
+      }
     }
   }
 
+  @keyframes opacity {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 </style>

@@ -21,7 +21,7 @@
 <style lang="scss">
 	@import "~/assets/scss/variables/_utils.scss";
 	.c-landing{
-		background: url(../assets/images/hp-back2.jpg);
+		background: url(../assets/images/hp-back.jpg);
 		background-size: cover;
 		background-position: center center;
 		height: 100%;

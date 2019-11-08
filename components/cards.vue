@@ -1,43 +1,38 @@
 <template>
 	<div class="c-cards">
-       <h1 class="c-cards__title">je choisis mon fini ultra pigmenté</h1>
+		<div class="c-cards__count"><span>1</span>/<span>3</span></div>
+        <h1 class="c-cards__title">je choisis mon fini ultra pigmenté</h1>
 		<div class="c-cards__nav">
 			<div class="c-cards__nav--left">
-				<h3 class="c-cards__nav__title">CREAM LIP STAIN MAT SANS TRANSFERT </h3>
+				<h3 class="c-cards__nav__title" v-html="activeSubtitle"></h3>
 				<div class="c-cards__nav__dots">
 					<span class="c-cards__nav__dots__item" id="item1" :data-id="activeDot"></span>
 					<span class="c-cards__nav__dots__item" id="item2" :data-id="activeDot"></span>
 					<span class="c-cards__nav__dots__item" id="item3" :data-id="activeDot"></span>
-				</div>
-			</div>
-			<div class="c-cards__nav--right">
-				<h3 class="c-cards__nav__title">CREAM LIP Shine Ultra brillant</h3>
-				<div class="c-cards__nav__dots">
 					<span class="c-cards__nav__dots__item" id="item4" :data-id="activeDot"></span>
 					<span class="c-cards__nav__dots__item" id="item5" :data-id="activeDot"></span>
 				</div>
 			</div>
 		</div>
-       <div
-        v-if="isShowing"
-        class="wrapper"
-        >
-	        <GameCard
-	          v-for="(card, index) in cards"
-	          :key="index"
-	          :index="index"
-	          :card="card"
-	          :is-current="index === 0"
-	          :data-index = "index + dataIndex"
-	          @hideCard="removeCardFromDeck"
-	          @likeCard="likeCard"
-	        />   
 
-	        <div class="c-cards__controller">
-	        	<div class="pass c-cards__controller__item" id="passItem"></div>
-	        	<div class="like c-cards__controller__item" id="likeItem"></div>
+    	<transition name="fade">
+	        <div
+	        v-if="isShowing"
+	        class="wrapper"
+	        >
+		        <GameCard
+		          v-for="(card, index) in cards"
+		          :key="index"
+		          :index="index"
+		          :card="card"
+		          :data-index = "index + dataIndex"
+		          @hideCard="removeCardFromDeck"
+		        />   
 	        </div>
-       </div>
+		</transition>
+
+		<div class="c-cards__like" @click="likeCard">je valide cette teinte</div>
+
 	</div>
 </template>
 
@@ -55,6 +50,7 @@ export default {
       isShowing: true,
       dataIndex: 1,
       activeDot: 1,
+      activeSubtitle: "CREAM LIP<br>STAIN MAT SANS TRANSFERT",
       cards: [
       	{
       		"title" : 'Mat',
@@ -183,7 +179,7 @@ export default {
       	},
       	{
       		"title" : 'Metallique',
-      		'image' : 'card2.jpg',
+      		'image' : 'metaliique1.jpg',
       		'category' : 'Cream lip stain',
       		'items' : [
       			{
@@ -366,60 +362,60 @@ export default {
 				          'number': '10'
 				        },
 				        {
-				          'id': 9,
+				          'id': 10,
 				          'color': '#460d21',
 				          'number': '11'
 				        },
 				        {
-				          'id': 9,
+				          'id': 11,
 				          'color': '#c57c70',
 				          'number': '12'
 				        },
 				        {
-				          'id': 9,
+				          'id': 12,
 				          'color': '#bb5257',
 				          'number': '13'
 				        },
-				        {
-				          'id': 9,
-				          'color': '#682228',
-				          'number': '14'
-				        },
-				        {
-				          'id': 9,
-				          'color': '#451c32',
-				          'number': '15'
-				        },
-				        {
-				          'id': 9,
-				          'color': '#d75e5a',
-				          'number': '16'
-				        },
-				        {
-				          'id': 9,
-				          'color': '#8a2f8d',
-				          'number': '17'
-				        },
-				        {
-				          'id': 9,
-				          'color': '#883f38',
-				          'number': '18'
-				        },
-				        {
-				          'id': 9,
-				          'color': '#c22d54',
-				          'number': '19'
-				        },
-				        {
-				          'id': 9,
-				          'color': '#c31c1f',
-				          'number': '20'
-				        },
-				        {
-				          'id': 9,
-				          'color': '#830221',
-				          'number': '21'
-				        }
+				        // {
+				        //   'id': 13,
+				        //   'color': '#682228',
+				        //   'number': '14'
+				        // },
+				        // {
+				        //   'id': 14,
+				        //   'color': '#451c32',
+				        //   'number': '15'
+				        // },
+				        // {
+				        //   'id': 15,
+				        //   'color': '#d75e5a',
+				        //   'number': '16'
+				        // },
+				        // {
+				        //   'id': 16,
+				        //   'color': '#8a2f8d',
+				        //   'number': '17'
+				        // },
+				        // {
+				        //   'id': 17,
+				        //   'color': '#883f38',
+				        //   'number': '18'
+				        // },
+				        // {
+				        //   'id': 18,
+				        //   'color': '#c22d54',
+				        //   'number': '19'
+				        // },
+				        // {
+				        //   'id': 19,
+				        //   'color': '#c31c1f',
+				        //   'number': '20'
+				        // },
+				        // {
+				        //   'id': 20,
+				        //   'color': '#830221',
+				        //   'number': '21'
+				        // }
 				    ]
       			},
       		],
@@ -482,7 +478,7 @@ export default {
 				          'number': '30'
 				        },
 				        {
-				          'id': 9,
+				          'id': 10,
 				          'color': '#b6317f',
 				          'number': '31'
 				        }
@@ -494,29 +490,25 @@ export default {
     };
   },
 
-	mounted () {
-	  	document.getElementById('passItem').addEventListener('animationend', e => {
-	    	this.animateChoose(e.target.id, 'flashing')
-	    })
-	},
-
   methods: {
   	likeCard(){
   		this.$emit('likeCard', this.cards[this.activeDot - 1]);
   	},
-  	animateChoose(id, className){
-    	const el = document.getElementById(id)
-    	el.classList.toggle(className)
-  	},
     removeCardFromDeck(as) {
-  	  this.animateChoose('passItem', 'flashing');
   	  this.activeDot++;
       this.counter ++;
       this.dataIndex --;
+      if(this.activeDot > 3){
+      	this.activeSubtitle = "CREAM LIP<br>SHINE ULTRA BRILLANT";
+      }else{
+      	this.activeSubtitle = "CREAM LIP<br>STAIN MAT SANS TRANSFERT";
+      }
       if(this.counter == this.cards.length){
         this.isShowing = false;
         this.counter = 0;
         this.dataIndex = 1;
+        this.activeDot = 1;
+      	this.activeSubtitle = "CREAM LIP<br>STAIN MAT SANS TRANSFERT";
         setTimeout(() => {
           this.isShowing = true;
         }, 50);
@@ -531,18 +523,8 @@ export default {
 <style lang="scss">
 	@import "~/assets/scss/variables/_utils.scss";
 
-	.flashing {
-	  animation: flash .5s;
-	}
-
-	@keyframes flash {
-	  0% {transform: scale(.8);}
-	  50% {transform: scale(.9);}
-	  100% {transform: scale(1);}
-	}
-	
 	.c-cards{
-	    padding-top: 15px;
+	    padding-top: 10px;
 	    position: relative;
 	    -ms-touch-action: pan-y;
 	    touch-action: pan-y;
@@ -551,18 +533,44 @@ export default {
 	        margin: 0 35px;
 	        background: $color-gray;
 	        border-radius: 12px;
-			padding: 20px 24px 58px 24px;
+			padding: 22px 24px 7.3vH 24px;
   			box-shadow: 0px 0px 34.4px 8.6px rgba(0, 0, 0, 0.19);
   			z-index: 1;
 	    }
+	    &__count{
+	    	border-radius: 15px;
+	    	background: $color-white;
+	    	text-align: center;
+	    	font-size: 10px;
+	    	max-width: 33px;
+	    	margin: auto;
+	    	margin-bottom: 6px;
+	    	padding: 8px 0;
+	    	span{
+	    		margin: 0 1px;
+	    	}
+	    }
+		&__title{
+			text-transform: uppercase;
+			color: $color-primary;
+			font-size: 20px;
+			line-height: 24px;
+			font-family: AvalonBoldOblique;
+			text-align: center;
+			margin: 0 auto 13px auto;
+			position: relative;
+			z-index: 1;
+			max-width: 200px;
+			span{
+				color: $color-black;
+			}
+		} 
 	    &__nav{
-			display: flex;
-			justify-content: space-between;
 			position: relative;
 			z-index: 1;
 			padding: 0 30px;
 			text-align: center;
-			margin-bottom: 18px;
+			margin-bottom: 16px;
 			&__title{
 				color: $color-white;
 				text-transform: uppercase;
@@ -570,6 +578,8 @@ export default {
 				font-size: 12px;
 				line-height: 15px;
 				padding: 0 11px;
+				margin: auto;
+				margin-bottom: 5px;
 			}
 			&__dots{
 				&__item{
@@ -597,55 +607,21 @@ export default {
 					}
 				}
 			}
-	    }
-		&__title{
-			text-transform: uppercase;
-			color: $color-primary;
-			font-size: 25px;
-			line-height: 30px;
-			font-family: AvalonBoldOblique;
+	    }  
+	    &__like{	    	
+			background: $color-black;
 			text-align: center;
-			margin: 0 10px 20px 10px;
-			position: relative;
-			z-index: 1;
-			span{
-				color: $color-black;
-			}
-		}   
-		&__controller{
-			display: flex;
-			justify-content: space-between;
-			position: absolute;
-			bottom: -26px;
-			left: 0;
-			right: 0;
+			color: $color-white;
+			border-radius: 20px;
+			text-transform: uppercase;
+			font-size: 13px;
+			padding: 13px 10px;
+			letter-spacing: 2px;
+		    width: 56%;
 			margin: auto;
-			width: 127px;
-			&__item{
-				border-radius: 100%;
-				background-color: $color-black;
-				background-position: center center;
-				background-repeat: no-repeat;
-				background-size: contain;
-				width: 53px;
-				height: 53px;
-				margin: 0 5px;
-				&.like{
-					background-image: url(~/assets/images/like.png);
-					background-size: 28.5px 26.5px;
-				}
-				&.pass{
-					background-image: url(~/assets/images/close.png);
-					background-size: 18px 18px;
-				}
-			}
-		}
+			position: relative;
+			top: -25px;
+			z-index: 1;
+	    }
 	}
-
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .4s;
-  }
-  .fade-enter, .fade-leave-to{
-    opacity: 0;
-  }
 </style>

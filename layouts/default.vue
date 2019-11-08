@@ -15,11 +15,3 @@ export default {
 }
 
 </script>
-
-
-<style lang="scss">
-	#wrapper{
-		height: 100vH;
-	}
-</style>
-

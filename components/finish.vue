@@ -59,6 +59,7 @@
 			position: relative;
 			top: 15px;
 			font-family: AvalonBoldOblique;
+			padding: 0 15px;
 			span{
 				color: $color-primary;
 			}
@@ -66,6 +67,10 @@
 	    &__related{
 	    	overflow: auto;
 	    	white-space: nowrap;
+	        -webkit-overflow-scrolling: touch;
+	        &::-webkit-scrollbar {
+	       		display: none;
+	        }
 	    	padding-left: 22px;
 	    	&__item{
 	    		display: inline-block;

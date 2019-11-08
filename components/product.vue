@@ -2,10 +2,10 @@
 	<div class="c-product">
 
 		<div class="c-product__item">
-			<h2 class="c-product__item__title">{{ itemSelected.category }} <span>{{ itemSelected.parent }}</span></h2>
-			<h2 class="c-product__item__subtitle">{{ itemSelected.title }}</h2>
+    		<div class="c-cards__count"><span>3</span>/<span>3</span></div>	
+			<h2 class="c-product__item__title">vous avez trouvé le fini qui vous correspond</span></h2>
 			<div class="c-product__item__img">				
-        		<img src="https://via.placeholder.com/455x455" alt="">
+        		<img :src="getImgUrl(itemSelected.image)" alt="">  
 			</div>
 			<div class="c-product__item__color">
 				<span :style="'background:' + itemSelected.colors[color].color">{{ itemSelected.colors[color].number }}</span>
@@ -27,6 +27,9 @@
 	export default {
 		props: ['itemSelected', 'color'],
 		methods:{
+		    getImgUrl(img) {
+		      return require('@/assets/images/'+img)
+		    },
 			finish(){
 				this.$emit('finish')
 			},
@@ -54,11 +57,21 @@
 			max-width: 79%;
 			margin: auto;
 			text-transform: uppercase;
-			padding: 16px 20px 0 20px;
+			padding: 0 20px 0 20px;
 			box-sizing: border-box;
+			.c-cards__count{
+				position: relative;
+				top: -10px;
+				background: $color-gray;
+			}
 			&__title{
 				font-family: AvalonBoldOblique;
 				font-size: 15px;
+				line-height: 17px;
+				position: relative;
+				top: -5px;
+				padding: 0 5px;
+				margin-bottom: 10px;
 				span{
 					color: $color-primary;
 				}

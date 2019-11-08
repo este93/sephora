@@ -1,13 +1,14 @@
 <template>
   <main class="container">
 
+  	<div class="horizontal" v-if="isHorizontal"></div>
+
 	<div 
 		class="c-wave--wrapper--top c-wave--wrapper" 
 		:class="{
 			state1 : waveState1, 
 			state2 : waveState2, 
 			state3 : waveState3, 
-			state4 : waveState4,
 			state5 : waveState5,
 			state6 : waveState6,
 			state7 : waveState7,
@@ -41,7 +42,6 @@
 			state1 : waveState1, 
 			state2 : waveState2, 
 			state3 : waveState3, 
-			state4 : waveState4,
 			state5 : waveState5,
 			state6 : waveState6,
 			state7 : waveState7,
@@ -64,82 +64,102 @@ import Product from '~/components/Product.vue'
 import Finish from '~/components/Finish.vue'
 
 export default {
-  components: {
-  	Landing,
-  	Cards,
-  	Match,
-  	Colors,
-  	Product,
-  	Finish
-  },
-  data(){
-  	return{
-  		component: 'Landing',
-  		waveState1: false,
-  		waveState2: false,
-  		waveState3: false,
-  		waveState4: false,
-  		waveState5: false,
-  		waveState6: false, 
-  		waveState7: false,
-  		waveState8: false,
-  		waveStateReset: false,
-  		dataSent: [],
-  		colorSelected: '',
-  		itemSelected: []
-  	}
-  },
-  methods: {
-  	start(){
-  		this.waveState1 = true;
-  		this.component = "Cards"
-  	},
-  	likeCard(data){
-  		this.waveState6 = false;
-  		this.waveState2 = true;
-  		this.dataSent = data;
-  		this.component = "Match"
-  	},
-  	matchDone(){
-  		this.waveState3 = true;
-  		this.component = "Colors"
-  		this.waveState1 = false;
-  		this.waveState2 = false;
-        var _self = this;
-  		setTimeout(function(){
-  			_self.waveStateReset = true;
-  		}, 1000)  		
-  	},
-  	product(color, data){
-  		this.component = "Product"
-  		this.waveStateReset = false;
-  		this.waveState3 = false;
-  		this.waveState8 = false;
-  		this.waveState1 = true;
-  		this.colorSelected = color;
-  		this.itemSelected = data;
-  	},
-  	finish(){
-  		this.waveState7 = true;
-  		this.component = "Finish"
-  	},
-  	back(){
-  		this.component = "Cards"
-  		this.waveState3 = false;
-  		this.waveStateReset = false;
-  		this.waveState8 = false;
-  		this.waveState1 = true;
-  	},
-  	backToColors(){
-  		this.waveState8 = true;
-  		this.component = "Colors"
-  	},
-  	backToProduct(){
-		this.component = "Product"
-  		this.waveState7 = false;
-  		this.waveState1 = true;
-  	}
-  }
+    components: {
+	  	Landing,
+	  	Cards,
+	  	Match,
+	  	Colors,
+	  	Product,
+	  	Finish
+    },
+    data(){
+	  	return{
+	  		component: 'Landing',
+	  		waveState1: false,
+	  		waveState2: false,
+	  		waveState3: false,
+	  		waveState5: false,
+	  		waveState6: false, 
+	  		waveState7: false,
+	  		waveState8: false,
+	  		waveStateReset: false,
+	  		dataSent: [],
+	  		colorSelected: '',
+	  		itemSelected: [],
+	  		isHorizontal: false
+	  	}
+    },
+	mounted() {
+	  this.$nextTick(()=>{
+	    window.addEventListener('resize', this.detectOrientationChange)
+	  })
+	},
+    created(){
+	    if (process.browser){
+			this.detectOrientationChange();
+	    }
+    },
+    beforeDestroy() {
+	   window.removeEventListener("resize", this.detectOrientationChange);
+	},
+    methods: {
+		detectOrientationChange(e) {
+		    if (window.matchMedia("(orientation: landscape)").matches) {
+			    this.isHorizontal = true;
+			}else{
+				this.isHorizontal = false;
+			}
+		},
+	  	start(){
+	  		this.waveState1 = true;
+	  		this.component = "Cards"
+	  	},
+	  	likeCard(data){
+	  		this.waveState6 = false;
+	  		this.waveState2 = true;
+	  		this.dataSent = data;
+	  		this.component = "Match"
+	  	},
+	  	matchDone(){
+	  		this.waveState3 = true;
+	  		this.component = "Colors"
+	  		this.waveState1 = false;
+	  		this.waveState2 = false;
+	        var _self = this;
+	  		setTimeout(function(){
+	  			_self.waveStateReset = true;
+	  		}, 1000)  		
+	  	},
+	  	product(color, data){
+	  		this.component = "Product"
+	  		this.waveStateReset = false;
+	  		this.waveState3 = false;
+	  		this.waveState8 = false;
+	  		this.waveState1 = true;
+	  		this.colorSelected = color;
+	  		this.itemSelected = data;
+	  	},
+	  	finish(){
+	  		this.waveState7 = true;
+	  		this.component = "Finish"
+	  	},
+	  	back(){
+	  		this.component = "Cards"
+	  		this.waveState3 = false;
+	  		this.waveStateReset = false;
+	  		this.waveState8 = false;
+	  		this.waveState1 = true;
+	  	},
+	  	backToColors(){
+	  		this.waveState8 = true;
+	  		this.component = "Colors"
+	  	},
+	  	backToProduct(){
+			this.component = "Product"
+	  		this.waveState7 = false;
+	  		this.waveState1 = true;
+	  	}
+    }
 }
 </script>
 
@@ -147,9 +167,11 @@ export default {
 	@import "~/assets/scss/variables/_utils.scss";
 
 	.c-wave{
-		  background: url(../assets/images/wave-full.png) repeat-x; 
+		  background: url(../assets/images/wave.svg) repeat-x; 
 		  position: absolute;
-		  width: 3500px;
+		  width: 4800px;
+		  height: 480px;
+		  top: 0;
 		  animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
 		  transform: translate3d(0, 0, 0);
 		  &--wrapper{
@@ -158,11 +180,8 @@ export default {
 			  bottom:0;
 			  left:0;
 			  background: $color-black;
-			  transition: all .6s linear;
+			  transition: all 1s ease-out;
 		  	  .c-wave{
-  				height: 450px;	
-				width: 4112px;
-				top: 0;
 		  	  }
 			  &--top{
 			  	top: 0;
@@ -172,17 +191,12 @@ export default {
 			  	  background-size: contain;
 		  	    }
 			  	&.state1{
-			  		transform: translateY(-150px);
+			  		transform: translateY(-180px);
 			  	}
 			  	&.state2{
 			  		transform: translateY(70px);
 			  	}
 			  	&.state3{
-			  		transform: translateY(600px);
-			  		// animation: returnTop 10s;
-			  		// animation-delay: 2s;
-			  	}
-			  	&.state4{
 			  		transform: translateY(600px);
 			  	}
 			  	&.state6{
@@ -190,7 +204,8 @@ export default {
 			  		opacity: 0;
 			  	}
 			  	&.state7{
-			  		transform: translateY(520px);
+			  		transition: transform 2s ease-out;
+			  		transform: translateY(75vH);
 			  	}
 			  	&.state8{
 			  		transform: translateY(-500px);
@@ -202,26 +217,10 @@ export default {
 			  	}
 			  }
 			  &--bottom{
-			  	transform: translateY(-60px);
+			  	transform: translateY(-90px);
 			  	&.state1{
 			  		transform: translateY(70px);
 			  		opacity: 0;
-			  	}
-			  	// &.state2{
-			  	// 	transform: translateY(-500px);
-				  // 	top: 0;
-				  // 	bottom: auto;
-			  	// }
-			  	// &.state3{				
-			  	// 	transform: translateY(-500px);
-				  // 	top: 0;
-				  // 	bottom: auto;	
-			  	// }
-			  	&.state4{
-			  		transform: translateY(-150px);
-			  		.c-wave{
-			  			background-size: contain;
-			  		}
 			  	}
 			  	&.state5{
 			  		transform: translateY(470px);
@@ -236,7 +235,7 @@ export default {
 			  	}
 			  	&.state8{
     				opacity: 1;
-			  		transform: translateY(-60px);
+			  		transform: translateY(-90px);
 			  	}
 			  }
 		  }
@@ -247,7 +246,7 @@ export default {
 	    margin-left: 0;
 	  }
 	  100% {
-	    margin-left: -1000px;
+	    margin-left: -1200px;
 	  }
 	}
 
@@ -262,7 +261,7 @@ export default {
 	}
 
     .fade-enter-active, .fade-leave-active {
-	  transition: opacity .5s;
+	  transition: opacity .4s;
 	}
 	.fade-enter, .fade-leave-to{
 	  opacity: 0;
@@ -287,5 +286,16 @@ export default {
 			display: block;
 			position: relative;
 		}
+	}
+
+	.horizontal{
+		background: url(../assets/images/horizontal.jpg) center center no-repeat;
+		background-size: cover;     
+		position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    z-index: 10;
 	}
 </style>

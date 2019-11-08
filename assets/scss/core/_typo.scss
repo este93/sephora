@@ -43,21 +43,18 @@ $font-size-base         : 10px;
 
 //------GLOBAL FONT SETTINGS
 html {
-  // @include font-size-vw($font-size-base, $font-size-base);
   height: 100%;
-  // overflow: hidden;
 }
 body {
   font-family: $ff-regular;
   -webkit-font-smoothing: antialiased;
   height: 100%;
-  // overflow: hidden;
 }
 
 a {
     text-decoration: none;
 }
 
-#wrapper{
+#wrapper, #__layout, #__nuxt{
 	height: 100%;
 }

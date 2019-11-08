@@ -14,7 +14,7 @@ export default {
       const _self = this;
       setTimeout(function(){
         _self.$emit('matchDone')
-      }, 1000)  
+      }, 2000)  
     }
   },
   mounted () { 
