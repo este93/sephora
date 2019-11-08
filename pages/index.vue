@@ -56,12 +56,12 @@
 </template>
 
 <script>
-import Landing from '~/components/Landing'
-import Cards from '~/components/Cards'
-import Match from '~/components/Match'
-import Colors from '~/components/Colors'
-import Product from '~/components/Product'
-import Finish from '~/components/Finish'
+import Landing from '~/components/landing'
+import Cards from '~/components/cards'
+import Match from '~/components/match'
+import Colors from '~/components/colors'
+import Product from '~/components/product'
+import Finish from '~/components/finish'
 
 export default {
     components: {
